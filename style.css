@@ -1,0 +1,147 @@
+:root {
+    /* Colors */
+    --c-bg: #121212;
+    --c-text: #C5C5C5;
+    --c-border: #000000;
+    --c-accent: #75BEFF;
+    --c-shadow: rgba(0, 0, 0, 0.1);
+
+    /* Gradients */
+    --grad-tracker: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    --grad-color: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+
+    /* Layout */
+    --h-header: 60px;
+    --sz-icon: 40px;
+    --radius-md: 10px;
+    --radius-sm: 5px;
+
+    /* Animation */
+    --trans-duration: 0.25s;
+}
+
+/* Universal box-sizing and resets */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* --- Dashboard --- */
+#dashboard {
+    position: relative; /* For absolute positioning of children */
+    height: var(--h-header);
+    flex-shrink: 0;
+    background-color: var(--c-bg);
+    border-bottom: 2px solid var(--c-border);
+}
+
+/* Dashboard icon buttons */
+#dashboard span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--h-header);
+    width: var(--h-header);
+    margin: 0 10px;
+    float: right;
+    cursor: pointer;
+    transition: transform var(--trans-duration) ease, color var(--trans-duration) ease;
+}
+
+#dashboard span.left {
+    float: left;
+}
+
+#dashboard span:hover {
+    transform: scale(1.1);
+}
+
+#dashboard span:hover svg {
+    color: var(--c-accent); /* Change color on hover */
+}
+
+#dashboard span svg {
+    height: var(--sz-icon);
+    width: var(--sz-icon);
+    color: var(--c-text) /* Set base color for icon */;
+}
+
+#dashboard span svg path {
+    fill: currentColor; /* SVG inherits color from parent span */
+}
+
+/* Centered info panels */
+#dashContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 10px;
+}
+
+/* Common styles for info panels */
+#dashTracker, #dashColor {
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 160px;
+    margin: 10px;
+    padding: 0 15px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 6px var(--c-shadow);
+    font-size: 1.2em;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+#dashTracker.activeTracker {
+    display: flex;
+}
+
+#dashColor {
+    background: var(--grad-color);
+}
+
+#dashTracker {
+    background: var(--grad-tracker);
+}
+
+#dashTracker_text {
+    margin-right: 10px;
+    font-size: 1.5em;
+}
+
+#dashTracker_moves {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+}
+
+/* --- Game Area --- */
+#game {
+    flex-grow: 1;
+    position: relative;
+}
+
+#game canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
